@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        
+        <title>CSS Playground</title>
+        
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <main>
+            <h1 id="title">:before and :after pseudo-selectors</h1>
+            <p id="hello"></p>
+
+            <p id="hello-description">The above text is created using CSS's <code>:before</code> and <code>:after</code> pseudo-selectors.</p>
+            <p>Those letters are not select-able because they literally don't exist in the DOM. Well, they do, and they don't.</p>
+            <p>I've found <a target="_blank" rel="noopener" href="https://css-tricks.com/almanac/selectors/a/after-and-before/">this</a> to be a really good resource on this topic.</p>
+
+            <br>
+            <p>Basically, <code>:before</code> injects stuff before the actual <b>content</b> of the <b>element</b>, and <code>:after</code> does it after - but both pieces of content are still confined to / bound to the element itself.</p>
+            <p>These pseudo-selectors take the CSS <code>content</code> property, which can take a string, an image url, nothing, or a <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Lists_and_Counters/Using_CSS_counters">counter</a></p>
+
+            <br>
+            <p id="content1">Hello, from p!</p>
+
+            <p id="content2">Hello, this is my image:</p>
+            <p>Notice how the image above isn't selectable either; nor can you right-click -> save</p>
+
+            <p id="content3"><code>content: ""</code> can affect the page!</p>
+
+            <hr>
+            <h1>CSS counters</h1>
+
+            <p>I did NOT know that this was possible, but here we are... CSS has counter logic. This can help with numbering lists.</p>
+            <p>In fact, this page is using counters. The "Section #:" parts of the titles use a counter named "section".</p>
+
+            <p>To create a counter, first declare/initialize it with a <code>counter-reset</code> property:</p>
+            <pre>
+<code>body {
+  counter-reset: section;
+}</code>
+</pre>
+
+            <p>Then, for the tags, classes, ids, etc. that rely on the counter, increment it, and display it via <code>content</code>:</p>
+
+            <pre>
+<code>h1:before {
+  counter-increment: section;   
+  content: "Section " counter(section) ": '";
+}</code>
+</pre>
+            <p>It seems CSS counters are naturally suited for Table of Contents styling: </p>
+
+            <ol>
+                <li>Introduction</li>
+                <li>Installation</li>
+                <ol>
+                    <li>Pre-requisites</li>
+                    <li>Troubleshooting</li>
+                    <li>Configuration</li>
+                    <ol>
+                        <li>Configuration File</li>
+                        <li>Environment Variables</li>
+                        <li>Some other topic...</li>
+                    </ol>
+                    <li>Usage</li>
+                </ol>
+                <li>Glossary</li>
+                <li>Terms</li>
+            </ol>
+
+            <p>The code for that: </p>
+
+            <pre>
+<code>ol {
+    counter-reset: item;
+    list-style-type: none;
+}
+
+li::before {
+    counter-increment: item;
+    content: counters(item, ".") " ";
+    color:#3aadff;
+}</code>
+</pre>
+            <p>If you're a frequent copy-and-paster like me, you'll appreciate pseudo-selectors like <code>:before</code> and <code>:after</code> - try selecting the chapter titles above. &#128540;</p>
+
+            <hr>
+            <h1>CSS Pseudo-elements vs Pseudo-classes</h1>
+
+            <p>I was always confused about the appearance of single colons, and double colons in CSS code... until now.</p>
+
+            <p>Double colons were introduced to distinguish pseudo-elements from pseudo-classes which use single colons (for historical and backwards-compatibility.)</p>
+
+            <p>According to <a target="_blank" rel="noopener" href="https://www.w3schools.com/css/css_pseudo_elements.asp">W3-Schools</a>:</p>
+            <blockquote>
+            "A CSS pseudo-element is used to style specified parts of an element. 
+            <br><br>
+            For example, it can be used to:
+                <br>- Style the first letter, or line of an element
+                <br>- Insert content before, or after, the content of an element"
+            </blockquote>
+            
+            <p>Some common pseudo-elements are <code>::first-line</code>, <code>::first-letter</code>, and <code>::selection</code>:</p>
+
+            <p id="long-paragraph">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vestibulum varius quam eget hendrerit. Curabitur sit amet laoreet metus. Sed velit sem, luctus nec condimentum sed, consequat id tellus. Fusce posuere, magna eget dignissim hendrerit, diam turpis sagittis odio, ut finibus lorem orci at tellus. Ut lectus tortor, malesuada et dictum nec, suscipit sit amet elit. Nunc iaculis sollicitudin viverra. Duis malesuada hendrerit est, sit amet tempor lorem ornare eget. Mauris non augue id felis blandit efficitur. Maecenas nec orci nec justo molestie viverra quis sit amet enim. Nulla facilisi. Proin ex diam, laoreet vitae diam sed, dignissim finibus massa. Pellentesque egestas eros non lectus pulvinar, eu feugiat dolor faucibus. Maecenas nulla est, viverra vel metus ut, ultricies interdum risus. Praesent convallis augue vitae sapien posuere, id sagittis nulla scelerisque. Duis auctor in ipsum eu finibus. Pellentesque efficitur tincidunt orci, nec varius nunc mollis non.</p>
+
+            <p>Pseudo-elements are special elements on the screen that are inaccessible from the DOM / HTML. Pseudo-classes are a way to style elements on the page when they go into a specific state.</p>
+
+            <br>
+
+            <div class="state-grid">
+                <code>:active</code>
+                <code>:checked</code>
+                <code>:disabled</code>
+                <code>:empty</code>
+                <code>:enabled</code>
+                <code>:first-child</code>
+                <code>:first-of-type</code>
+                <code>:focus</code>
+                <code>:hover</code>
+                <code>:in-range</code>
+                <code>:invalid</code>
+                <code>:lang(language)</code>
+                <code>:last-child</code>
+                <code>:last-of-type</code>
+                <code>:link</code>
+                <code>:not(selector)</code>
+                <code>:nth-child(n)</code>
+                <code>:nth-last-child(n)</code>
+                <code>:nth-last-of-type(n)</code>
+                <code>:nth-of-type(n)</code>
+                <code>:only-of-type</code>
+                <code>:only-child</code>
+                <code>:optional</code>
+                <code>:out-of-range</code>
+                <code>:read-only</code>
+                <code>:read-write</code>
+                <code>:required</code>
+                <code>:root</code>
+                <code>:target</code>
+                <code>:valid</code>
+                <code>:visited</code>
+            </div>
+        </main>
+    </body>
+</html>

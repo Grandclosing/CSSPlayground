@@ -1,0 +1,11 @@
+{
+  "name": "learningcss",
+  "version": "1.0.0",
+  "description": "Just playing around with CSS concepts aimlessly.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}
