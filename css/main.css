@@ -154,3 +154,61 @@ li::before {
 .state-grid code {
     background-color: transparent;
 }
+
+/* demonstrating the concepts of clearing floats */
+
+.box {
+    padding: 50px;
+    background-color: #40a373;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+}
+
+.big-box {
+    padding: 100px;
+    background-color: #781c33;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+}
+
+.fl-left {
+    float: left;
+}
+
+.fl-right {
+    float: right;
+}
+
+.clearer {
+    clear: both;
+}
+
+.overflower {
+    overflow: hidden;
+}
+
+/* styles resulting in similar layouts to the overflow method above */
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-container div {
+    align-self: flex-start;
+}
+
+.grower {
+    flex-grow: 1;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
+}
+
+.grid-container div {
+    align-self: start;
+}
