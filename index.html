@@ -189,7 +189,75 @@ li::before {
                 <div class="big-box">We're inside a grid with <code>grid-template-columns: 200px 1fr 200px;</code> - all of us have <code>align-self: start;</code></div>
                 <div class="box">I'm also a box</div>
             </div>
+
+            <h1>flex-basis vs width vs min-width</h1>
             
+            <p>I will confess, I've never heard of the <code>flex-basis</code> CSS property until today. Like the rest of the internet, I too was unsure about how it compared to setting <code>width</code> or <code>min-width</code>.</p>
+            <p>I found <a href="https://mastery.games/post/the-difference-between-width-and-flex-basis/" rel="noopener" target="_blank">this awesome article</a> which explains it succinctly.</p>
+
+            <br>
+            <p>Consider the following box: <code>display: flex; width: 800px; height: 200px;</code></p>
+            <div class="flex-basis-container">
+
+            </div>
+
+            <p>We can throw some items in it. Say, 3 items of 600px width...</p>
+
+            <div class="flex-basis-container">
+                <div class="flex-basis-container__item fbci_1">width: 100px;</div>
+                <div class="flex-basis-container__item fbci_2">width: 100px;</div>
+                <div class="flex-basis-container__item fbci_3">width: 100px;</div>
+            </div>
+
+            <p>If we use both <code>flex-basis</code> and <code>width</code>, it seems that <code>flex-basis</code> takes precedence.</p>
+
+            <div class="flex-basis-container">
+                <div class="flex-basis-container__item fbci_4">width: 100px; flex-basis: 200px;</div>
+                <div class="flex-basis-container__item fbci_5">width: 100px; flex-basis: 200px;</div>
+                <div class="flex-basis-container__item fbci_6">width: 100px; flex-basis: 200px;</div>
+            </div>
+
+            <p>If we use <code>flex-basis</code> and <code>min-width</code>, then <code>min-width</code> takes precedence.</p>
+
+            <div class="flex-basis-container">
+                <div class="flex-basis-container__item fbci_7">flex-basis: 200px; min-width: 250px;</div>
+                <div class="flex-basis-container__item fbci_8">flex-basis: 200px; min-width: 250px;</div>
+                <div class="flex-basis-container__item fbci_9">flex-basis: 200px; min-width: 250px;</div>
+            </div>
+
+            <h2>Conclusion 1: calculated width &lt; width &lt; flex-basis &lt; min-width</h2>
+
+            <div class="fb-demo-contianer">
+                <div class="flex-basis-container fbc-vertical">
+                    <div class="flex-basis-container__item fbci_10">height: 100px; flex-basis: 200px;</div>
+                    <div class="flex-basis-container__item fbci_11">height: 100px; flex-basis: 200px;</div>
+                    <div class="flex-basis-container__item fbci_12">height: 100px; flex-basis: 200px;</div>
+                </div>
+    
+                <h2>Conclusion 2: <code>flex-basis</code> applies to whatever the main flex axis is (determined by <code>flex-direction</code>)</h2>
+            </div>
+
+            <h2>Conclusion 3: <code>min-width</code> overflows the flex container, <code>width</code> and <code>flex-basis</code> do not.</h2>
+
+            <br> 
+            <div class="flex-basis-container">
+                <div class="flex-basis-container__item fbci_13">min-width: 250px;</div>
+                <div class="flex-basis-container__item fbci_14">min-width: 250px;</div>
+                <div class="flex-basis-container__item fbci_15">min-width: 250px;</div>
+                <div class="flex-basis-container__item fbci_16">min-width: 250px;</div>
+                <div class="flex-basis-container__item fbci_17">min-width: 250px;</div>
+                <div class="flex-basis-container__item fbci_18">min-width: 250px;</div>
+            </div>
+
+            <br> 
+            <div class="flex-basis-container">
+                <div class="flex-basis-container__item fbci_19">width: 250px;</div>
+                <div class="flex-basis-container__item fbci_20">width: 250px;</div>
+                <div class="flex-basis-container__item fbci_21">width: 250px;</div>
+                <div class="flex-basis-container__item fbci_22">width: 250px;</div>
+                <div class="flex-basis-container__item fbci_23">width: 250px;</div>
+                <div class="flex-basis-container__item fbci_24">width: 250px;</div>
+            </div>
         </main>
     </body>
 </html>
